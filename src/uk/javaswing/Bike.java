@@ -5,18 +5,18 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 public class Bike extends Vehicle  {
-	public Bike(int x, int y, int v) {
-		super(x, y, v,  new ImageIcon("res/cycleRider.png").getImage());
+	public Bike(int x, int y, int speed) {
+		super(x, y, speed,  new ImageIcon("res/cycleRider.png").getImage());
 	}
 
 	
 	private int yUp = -15;
 	private int yDown = 40;
-	protected static final int MAX_V = 40;
+	protected static final int MAX_SPEED = 40;
 	protected static final int MAX_TOP = 120;
 	protected static final int MAX_BOTTOM = 350;
 	
-	private int dv;	
+	private int speedup;	
 	private int shiftX;
 
 	public int getBikeShiftX() {
@@ -33,11 +33,11 @@ public class Bike extends Vehicle  {
 
 		
 	public void move(){
-		int v = getV();
+		int v = getSpeed();
 		int y = getY();
-		setV(v + dv);
-		if(v >= MAX_V){
-			setV(MAX_V);
+		setV(v + speedup);
+		if(v >= MAX_SPEED){
+			setV(MAX_SPEED);
 		}
  
 		if(v <= 0){
@@ -61,9 +61,9 @@ public class Bike extends Vehicle  {
 	public void keyPressed(KeyEvent e){
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_RIGHT){
-			dv = 5;
+			speedup = 5;
 		}if(key == KeyEvent.VK_LEFT){
-			dv = -5;
+			speedup = -5;
 		}if(key == KeyEvent.VK_UP){
 			setY(getBikeShiftY(yUp));
 		}if(key == KeyEvent.VK_DOWN){
@@ -74,7 +74,7 @@ public class Bike extends Vehicle  {
 	public void keyReleased(KeyEvent e){
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_RIGHT ||key== KeyEvent.VK_LEFT){
-			dv = 0;
+			speedup = 0;
 		}
 		if(key == KeyEvent.VK_UP){
 			setY(getY()-yUp);

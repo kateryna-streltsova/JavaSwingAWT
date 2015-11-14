@@ -7,20 +7,20 @@ public abstract class Vehicle {
 	private Image img;
 	private int x;
 	private int y;
-	private int v;
+	private int speed;
 
 	public void setX(int x) {
 		this.x = x;
 	}
 
 	public void setV(int v) {
-		this.v = v;
+		this.speed = v;
 	}
 
-	public Vehicle(int x, int y, int v, Image img){
+	public Vehicle(int x, int y, int speed, Image img){
 		this.x = x;
 		this.y = y;
-		this.v = v;
+		this.speed = speed;
 		this.img = img;
 	}
 	
@@ -36,8 +36,8 @@ public abstract class Vehicle {
 		return y;
 	}
 
-	public int getV() {
-		return v;
+	public int getSpeed() {
+		return speed;
 	}
 
 	public Image getImg() {

@@ -19,7 +19,6 @@ import javax.swing.Timer;
 
 public class Road extends JPanel implements ActionListener, Runnable {
 	static Image img;
-	private boolean isCollision;
 	Timer mainTimer = new Timer (20, this);
 
 	public Road(){
@@ -29,6 +28,7 @@ public class Road extends JPanel implements ActionListener, Runnable {
 		carsThread.start();
 		setFocusable(true);
 	}
+	
 	Bike bike = new Bike(30, 165, 5);
 	Ambulance ambulance;
 
@@ -51,7 +51,7 @@ public class Road extends JPanel implements ActionListener, Runnable {
 		g.drawImage(bike.getImg(), bike.getX(), bike.getY(), null);
 		Font font = new Font ("Courier New", Font.BOLD, 16);
 		g.setFont(font);
-		g.drawString("Bike speed is: "+bike.getV(), 15, 25);
+		g.drawString("Bike speed is: "+bike.getSpeed(), 15, 25);
 
 		Iterator <Car> iterator = cars.iterator();
 		while (iterator.hasNext()){
@@ -62,14 +62,14 @@ public class Road extends JPanel implements ActionListener, Runnable {
 				g.drawImage(car.getImg(), car.getX(), car.getY(), null);
 			}
 		}
-		if(isCollision){
+		if(collision()){
 			g.drawImage(ambulance.getImg(), ambulance.getX(), ambulance.getY(), null);
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(isCollision){
+		if(collision()){
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
@@ -84,15 +84,14 @@ public class Road extends JPanel implements ActionListener, Runnable {
 			car.move();
 		}
 
-		isCollision = testCollisions();
-		if(isCollision){
+		if(collision()){
 			ambulance = new Ambulance(bike.getX(), Bike.MAX_BOTTOM-50, 0, this);
 		}
 		repaint();
 
 	}
 
-	private boolean testCollisions(){
+	private boolean collision(){
 		Iterator <Car> iterator = cars.iterator();
 		while (iterator.hasNext()){
 			Car car = iterator.next();

@@ -8,13 +8,13 @@ public class Car extends Vehicle {
 		return road;
 	}
 
-	public Car(int x, int y, int v, Road road){
-		super(x, y, v, new ImageIcon("res/car.png").getImage());
+	public Car(int x, int y, int speed, Road road){
+		super(x, y, speed, new ImageIcon("res/car.png").getImage());
 		this.road =road;
 	}
 
 	public void move(){
-		 int x = getX() + road.bike.getBikeShiftX() + getV();
+		 int x = getX() + road.bike.getBikeShiftX() + getSpeed();
 		 setX(x);
 	}
 	
