@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Road extends JPanel implements ActionListener, Runnable {
+	private boolean isCollision; 
 	static Image img;
 	Timer mainTimer = new Timer (20, this);
 
@@ -62,14 +63,14 @@ public class Road extends JPanel implements ActionListener, Runnable {
 				g.drawImage(car.getImg(), car.getX(), car.getY(), null);
 			}
 		}
-		if(collision()){
+		if(isCollision){
 			g.drawImage(ambulance.getImg(), ambulance.getX(), ambulance.getY(), null);
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(collision()){
+		if(isCollision){
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
@@ -84,11 +85,14 @@ public class Road extends JPanel implements ActionListener, Runnable {
 			car.move();
 		}
 
-		if(collision()){
+		isCollision = collision();
+		 if(isCollision){
 			ambulance = new Ambulance(bike.getX(), Bike.MAX_BOTTOM-50, 0, this);
+			repaint();
+			JOptionPane.showMessageDialog(null, "You crashed a car");
+		}else{
+		   repaint();
 		}
-		repaint();
-
 	}
 
 	private boolean collision(){
@@ -96,7 +100,6 @@ public class Road extends JPanel implements ActionListener, Runnable {
 		while (iterator.hasNext()){
 			Car car = iterator.next();
 			if(bike.getRectange().intersects(car.getRectange())){
-				JOptionPane.showMessageDialog(null, "You crashed a car");
 				return true;
 			}
 		}
