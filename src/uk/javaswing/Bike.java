@@ -35,13 +35,13 @@ public class Bike extends Vehicle  {
 	public void move(){
 		int v = getSpeed();
 		int y = getY();
-		setV(v + speedup);
-		if(v >= MAX_SPEED){
-			setV(MAX_SPEED);
+		setSpeed(v + speedup);
+		if(getSpeed() >= MAX_SPEED){
+			setSpeed(MAX_SPEED);
 		}
  
-		if(v <= 0){
-			setV(0); 
+		if(getSpeed() <= 0){
+			setSpeed(0); 
 		}
 		if(y <= MAX_TOP){
 			setY(MAX_TOP);

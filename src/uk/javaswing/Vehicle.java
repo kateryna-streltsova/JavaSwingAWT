@@ -13,7 +13,7 @@ public abstract class Vehicle {
 		this.x = x;
 	}
 
-	public void setV(int v) {
+	public void setSpeed(int v) {
 		this.speed = v;
 	}
 
